@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shop Page</title>
+    <link href="/main.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/User/User-ShopAdmin/add-service-style.css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <div class="container" id="container">
+
+
+        <div style="background-image: url('/images/{{shop.shopImage}}');" class="restaurant-preview__background"
+            id="restaurant-background">
+            <input required name="shopImage" type="hidden" type="file" class="form-control-file" id="exampleFormControlFile1">
+            <div class="restaurant-preview__wrapper">
+
+                {{!-- <img src="/images/{{productImage}}" alt="{{productImage}}"> --}}
+                <div class="restaurant-preview">
+                    <div style="display: inline; margin-bottom:10px">
+                        <span style="display: inline-block;" class="restaurant-preview__title">{{shop.shopName}}</span>
+                        <span><a href="/shopOwner/editShop" style="margin-left: 20px;"><button type="submit" class="btn btn-primary" id="download"><i class="fa fa-edit"></i> Edit </button></a></span>
+                    </div>
+
+                    <div class="restaurant-preview__footer">
+                        {{!-- <span class="restaurant-preview__price">5 people in the queue</span> --}}
+
+                        <label class="switch">
+                            <input id="switchBtn" onchange="statusToggle()" type="checkbox" {{#ifEquals shop.status "available"}}checked{{/ifEquals}}>
+                            <span class="slider round"></span>
+                        </label <span class="restaurant-preview__Price">{{shop.status}}</span>
+                    </div>
+                </div>
+            </div>
+            <a href="/shopOwner/editImage"><button type="submit" class="btn btn-primary" id="download"><i class="fa fa-edit"></i>image</button></a>
+        </div>
+        {{!-- <div class="restaurant-menu__nav">
+            <ul class="restaurant-menu">
+                <li><a class="restaurant-menu__card" href="javascript:void(0)">Black & White</a></li>
+                <li><a class="restaurant-menu__card" href="javascript:void(0)">Colored</a></li>
+                <li><a class="restaurant-menu__card" href="javascript:void(0)">Thesis</a></li>
+                <li><a class="restaurant-menu__card" href="javascript:void(0)">Urgent</a></li>
+                <li><a class="restaurant-menu__card" href="javascript:void(0)">3D printing</a></li>
+                <li><a class="restaurant-menu__card" href="javascript:void(0)">T-shirt</a></li>
+            </ul>
+        </div> --}}
+        <div class="restaurant-choose__wrapper">
+            <div class="restaurant-choose">
+                <span class="restaurant-choose__city">Services</span>
+                <!-- <p class="no-service-yet">No services yet, please add the services provided by your shop.</p> -->
+                <ul class="restaurant-choose__first">
+                    <div class="row">
+
+                 {{#each products}}
+                      <div class="col-6">
+                          <li class="restaurant-card">
+                              <div class="restaurant-card__content">
+                                  <span class="restaurant-card__title "
+                                     style="font-weight: bold;">{{productName}}</span>
+                                      <div >
+                                          <a href="/shopOwner/editProduct/{{_id}}" class="btn btn-float"><i class="fas fa-edit">Edit</i></a>
+                                             <a href="/shopOwner/deleteProduct/{{_id}}">
+                                                <button type="submit" class="btn red">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                             </a>
+                                      </div>
+                                  
+                                <span class="restaurant-card__options"> </span>
+                              <span class="restaurant-card__price">{{productPrice}} MYR per page/item </span>
+                                </div>
+                             <img src="/images/{{productImage}}" alt="{{productImage}}">
+                                
+                            </li>
+
+                        </div>
+                             {{else}}
+                             <p>You have not created any products yet</p>
+                        {{/each}}
+                    </div>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- <footer class="footer">
+    <div class="footer__wrapper">
+        <img src="components/footer/images/white-logo.svg" alt="footer">
+    </div>
+</footer> -->
+        <!-- ///////////////////////////////////////////////////////////////////////////.//////////// -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script>
+       
+        function statusToggle() {
+            fetch('/shopOwner/statusToggle')
+                .then(response => response.json())
+                .then(data =>{
+                    window.location.reload(false);
+                    return false;
+                });
+           //location.href="http://localhost:3000/shopOwner/shopProducts"; 
+            //return false;
+
+        }
+        
+
+
+
+    </script>
+
+
+</body>
+
+</html>

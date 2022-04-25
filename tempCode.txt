@@ -1,0 +1,16 @@
+{{!-- <ul id="myUL" class="restaurant-choose__first"> --}}
+                    {{!-- {{#each products}}
+                    <div class="col-sm-4">
+
+                            <li style="list-style:none" class="prodCard">
+                                <a href="/checkout/{{_id}}" class=" card ">
+                             <img src="/images/{{productImage}}" alt="{{productImage}}">
+                                    <span class="card__name">Service: {{productName}} Printing</span>
+                                    <span class="card__cuisines">Price: {{productPrice}} MYR</span>
+                                    <span class="card__cuisines">Shop: {{shopOwner.shopName}} </span>
+                                </a>
+                            </li>
+                    </div>
+                        {{!-- </ul> --}}
+              
+                    {{/each}} --}} 

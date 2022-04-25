@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous"> --}}
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary{
+            background-color: maroon;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-size: 20px;
+            margin:0 auto;
+            margin: 10px;
+        }
+       
+    </style>
+    <title>Sales Report</title>
+</head>
+
+<body onload="myFunction()">
+
+    <div class="row">
+        <div  class="container">
+            <a href="/shopOwner/dashboard"><button class="btn btn-primary"><i class="fa fa-backward"></i> Back to Dashboard</button></a>
+            <button  class="btn btn-primary" id="download"><i class="fa fa-download"></i> download pdf</button>
+        </div>
+        <div class="col-md-12">
+            <div class="card" id="report">
+
+                <h2>Sales Report</h2>
+
+                <table>
+                    <tr>
+                        <th>Order</th>
+                        <th>Matric No</th>
+                        <th>Status</th>
+                        <th>Number of Pages</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th>Date</th>
+                    </tr>
+                    {{#each orders}}
+
+                    <tr>
+                        <td>{{product.productName}}</td>
+                        <td>{{matricNo}}</td>
+                        <td>{{status}}</td>
+                        <td>{{numPages}}</td>
+                        <td>{{quantity}}</td>
+                        <td>{{totalPrice}}</td>
+                        <td>{{createdAt}}</td>
+                        {{else}}
+                        <p>You do not have any sales records yet.</p>
+                    </tr>
+                    {{/each}}
+
+                </table>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</body>
+<script>
+    function myFunction() {
+    document.getElementById("download")
+        .addEventListener("click", () => {
+            const report = this.document.getElementById("report");
+            console.log(report);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'Report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(report).set(opt).save();
+        })
+}
+</script>
+
+</html>

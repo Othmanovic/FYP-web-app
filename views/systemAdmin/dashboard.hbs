@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>System Admin</title>
+    <link href="main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,
+    700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext"
+          rel="stylesheet">
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600&display=swap');
+
+*{
+	list-style: none;
+	font-family: 'Montserrat', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	background: #ebecf1;
+	color: black;
+}
+
+#inbox-icon{
+  font-size: 30px;
+  color: maroon;
+}
+#inbox-icon:hover{
+  cursor: pointer;
+}
+
+.view_item img{
+	width: 75px;
+}
+
+.wrapper{
+	width: 800px;
+	margin: 20px auto;
+  margin-top: 100px;
+}
+
+
+.view_main{
+	background: #fff;
+	border-radius: 3px;
+	padding: 15px;
+}
+
+.list-view .view_item {
+	background: #fff;
+	border: 1px solid #e2efe1;
+	margin: 10px;
+	padding: 10px 20px;
+	display: flex;
+	align-items: center;
+}
+
+.list-view .view_item:last-child{
+	margin-bottom: 0;
+}
+
+.list-view .view_item .vi_left{
+	margin-right: 25px;
+}
+
+.view_item .title{
+	font-weight: 600;
+}
+
+.view_item .content{
+	margin: 5px 0;
+	font-size: 14px;
+	line-height: 22px;
+	font-weight: 200;
+  color: black;
+}
+
+.view_item .accept-btn, .ignore-btn{
+	width: 125px;
+	background: #4abd3e;
+	padding: 8px 5px;
+	border-radius: 3px;
+	color: #fff;
+	text-align: center;
+	font-weight: 200;
+	cursor: pointer;
+  display: inline-block;
+}
+
+.view_item .accept-btn{
+  background-color: maroon;
+}
+
+.view_item .ignore-btn{
+  background-color: darkgray;
+}
+
+.view_item .btn:hover{
+	background: #3bd62b;
+}
+
+.grid-view{
+	width: 100%;
+}
+
+.grid-view .view_item {
+	display: inline-block;
+    border: 1px solid #e2efe1;
+    width: 230px;
+    padding: 25px;
+    text-align: center;
+    margin: 10px;
+}
+
+.grid-view .view_item .vi_left{
+	margin-bottom: 10px;
+}
+
+.grid-view .view_item .btn{
+	margin: 0 auto;
+}
+
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</head>
+<body>
+<!-- ///////////////////////////////  CONTENT   ///////////////////////////////////   -->
+
+
+
+<div class="wrapper">
+	<div class="view_main">
+		<div class="view_wrap list-view" style="display: block;">
+
+            {{#each users}}
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="tomato.png" alt="tomato">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Shop Name: {{username}}</p>
+					<p class="content">Created On{{createdAt}}</p>
+					<a href="/acceptShop/{{_id}}"><div class="accept-btn">Accept</div>  <div class="ignore-btn">Ignore</div></a>
+				</div>
+			</div>
+			{{else}}
+			<p>There are no shop requists to verify, yet</p>
+
+            {{/each}}
+
+    
+	</div>
+</div>
+
+            {{!--
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="chilli.png" alt="chilli">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Library shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">Accept</div>  <div class="ignore-btn">Ignore</div>
+				</div>
+			</div>
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="carrot.png" alt="carrot">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Meranti</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">Accept</div>  <div class="ignore-btn">Ignore</div>
+				</div>
+			</div>
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="onion.png" alt="onion">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Barcelona shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">Accept</div> <div class="ignore-btn">Ignore</div>
+				</div>
+			</div>
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="potato.png" alt="potato">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">JDT shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">Accept</div>  <div class="ignore-btn">Ignore</div>
+				</div>
+			</div>
+		</div>
+		<div class="view_wrap grid-view" style="display: none;">
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="apple.png" alt="apple">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Apple shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">Accept</div>  <div class="ignore-btn">Ignore</div>
+				</div>
+			</div>
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="banana.png" alt="banana">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Banana shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">Accept</div>  <div class="ignore-btn">Ignore</div>
+				</div>
+			</div>
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="grapes.png" alt="grapes">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Dell shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">Accept</div>  <div class="ignore-btn">Ignore</div>
+				</div>
+			</div>
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="pineapple.png" alt="pineapple">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">Barcelona shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">View More</div>  <div class="ignore-btn">View More</div>
+				</div>
+			</div>
+			<div class="view_item">
+				<!-- <div class="vi_left">
+					<img src="strawberry.png" alt="strawberry">
+				</div> -->
+				<div class="vi_right">
+					<p class="title">JDT shop</p>
+					<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam impedit, veniam! Voluptate a impedit animi!</p>
+					<div class="accept-btn">View More</div>  <div class="ignore-btn">View More</div>
+				</div>
+			</div> --}}
+
+		
+
+
+
+
+
+</body>
+</html>

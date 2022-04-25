@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Successful Payment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="title">Payment Successful!</div>
+        <div style="color: rgb(63, 58, 58);" class="title">Thank you {{order.customer.displayName}} for printing with UTM-OPS</div>
+        <div class="info">
+            <div class="row">
+                <div class="col-7"> <span id="heading">Date</span><br> <span id="details">{{order.createdAt}}</span>
+                </div>
+                <div class="col-5 pull-right"> <span id="heading">Order No.</span><br> <span
+                        id="details">{{order._id}}</span> </div>
+            </div>
+        </div>
+        <div class="pricing">
+            <div class="row">
+                <div class="col-9"> <span id="name">{{order.product.productName}}</span> </div>
+                <div class="col-3"> <span id="price">MYR {{order.product.productPrice}}</span> </div>
+            </div>
+            <div class="row">
+                <div class="col-9"> <span id="name">Number of Pages</span> </div>
+                <div class="col-3"> <span id="price">{{order.numPages}} pages</span> </div>
+            </div>
+            <div class="row">
+                <div class="col-9"> <span id="name">Quantity</span> </div>
+                <div class="col-3"> <span id="price">{{order.quantity}} copies</span> </div>
+            </div>
+            <div class="row">
+                <div class="col-9"> <span id="name">From the Shop:</span> </div>
+                <div class="col-3"> <span id="price">{{order.shopOwner.shopName}}</span> </div>
+            </div>
+            <div class="row">
+                <div class="col-9"> <span id="name">Customer Name:</span> </div>
+                <div class="col-3"> <span id="price">{{order.customer.displayName}}</span> </div>
+            </div>
+        </div>
+        <div class="total">
+            <div class="row">
+                <div class="col-9" style="font-size: large;">Total</div>
+                <div class="col-3"><big>MYR {{order.totalPrice}}</big></div>
+            </div>
+        </div>
+
+        <div class="error-actions">
+
+            
+            <a href="/customer/dashboard" style="margin-left: 60px; border: none; text-decoration:none; background-color:maroon"
+                class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                Take Me Home </a>
+            
+            <a onclick="togglePopup()" style="margin-left: 20px;" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span>
+                Contact
+                Support </a>
+
+        </div>
+
+        <div class="popup" id="popup-1">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="togglePopup()">×</div>
+                <h1>Technical Support</h1>
+                <br>
+                <p><span><strong>Email: </strong></span>utm-ops@gmail.com</p>
+                <p><span><strong>Phone No: </strong></span>+6017xxxxxxx</p>
+            </div>
+        </div>
+
+
+
+        {{!-- <div class="info">
+            <div class="row">
+                <div class="col-7"> <span id="name">Dear Customer</span><br> <span id="heading">Thank you for printing
+                        with UTM-OPS</span> </div>
+                <div class="col-5 pull-right"> <span id="heading">The shop will notify you once about the status of your
+                        order</span><br> </div>
+            </div>
+        </div>
+
+        <div class="pricing">
+            <div class="row">
+                <div class="col-3"> <span id="heading">If you face any problem, do not hesitate to contact our technical
+                        support</span> </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <div class="error-actions">
+
+                <a onclick="togglePopup()" class="btn btn-default btn-lg"><span
+                        class="glyphicon glyphicon-envelope"></span> Contact
+                    Support </a>
+
+                <a href="/customer/dashboard" style="margin-left: 100px; border: none; text-decoration:none;"
+                    class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                    Take Me Home </a>
+            </div>
+
+            <div class="popup" id="popup-1">
+                <div class="overlay"></div>
+                <div class="content">
+                    <div class="close-btn" onclick="togglePopup()">×</div>
+                    <h1>Technical Support</h1>
+                    <br>
+                    <p><span><strong>Email: </strong></span>utm-ops@gmail.com</p>
+                    <p><span><strong>Phone No: </strong></span>+6017xxxxxxx</p>
+                </div>
+            </div>
+        </div> --}}
+    </div>
+</body>
+<style>
+    body {
+        background: #ddd3;
+        height: 100vh;
+        vertical-align: middle;
+        display: flex;
+        font-family: Muli;
+        font-size: 14px
+    }
+
+    .card {
+        margin: auto;
+        width: 38%;
+        max-width: 600px;
+        padding: 4vh 0;
+        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-top: 8px solid maroon;
+        border-bottom: 8px solid maroon;
+        border-left: none;
+        border-right: none
+    }
+
+    @media(max-width:768px) {
+        .card {
+            width: 90%
+        }
+    }
+
+    .title {
+        color: maroon;
+        font-weight: bold;
+        margin-bottom: 2vh;
+        padding: 0 8%;
+        font-size: initial
+    }
+
+    #details {
+        font-weight: 400
+    }
+
+    .info {
+        padding: 5% 8%;
+
+    }
+
+    .info .col-5 {
+        padding: 0
+    }
+
+    #heading {
+        color: grey;
+        line-height: 6vh
+    }
+
+    .pricing {
+        background-color: #ddd3;
+        padding: 2vh 8%;
+        font-weight: 400;
+        line-height: 2.5;
+    }
+
+
+    .pricing .col-3 {
+        padding: 0
+    }
+
+    .total {
+        padding: 2vh 8%;
+        color: maroon;
+        font-weight: bold
+    }
+
+    .total .col-3 {
+        padding: 0
+    }
+
+    .footer {
+        padding: 0 8%;
+        font-size: large;
+        color: black
+    }
+
+    .footer img {
+        height: 5vh;
+        opacity: 0.2
+    }
+
+    .footer a {
+        color: maroon;
+    }
+
+    .footer .col-10,
+    .col-2 {
+        display: flex;
+        padding: 3vh 0 0;
+        align-items: center
+    }
+
+    .footer .row {
+        margin: 0
+    }
+
+    .error-template {
+        padding: 40px 15px;
+        text-align: center;
+    }
+
+    .error-actions {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .error-actions .btn {
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .popup .overlay {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+
+
+    .popup .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: #fff;
+        width: 95%;
+        max-width: 500px;
+        height: 250px;
+        z-index: 2;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    .popup .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 30px;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+    }
+
+    .popup.active .overlay {
+        display: block;
+    }
+
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+</style>
+<script>
+
+    function togglePopup() {
+        document.getElementById("popup-1").classList.toggle("active");
+    }
+
+</script>
+
+</html>

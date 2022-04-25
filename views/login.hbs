@@ -1,0 +1,146 @@
+{{!-- <h3><i class="fas fa-book-reader"></i> StoryBooks</h3>
+<div class="section">
+  <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam, officia!</p>
+</div>
+<div class="divider"></div>
+<div class="section">
+  <a href="/auth/google" class="btn red darken-1">
+    <i class="fab fa-google left"></i>Login with Google blaaa blaaa blaaa
+  </a>
+</div> --}}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="signIn.css" />
+  <title>Sign in and Sign up Form</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+
+        <form action="#" class="sign-in-form">
+          <h2 class="title">Sign in</h2>
+          {{!-- <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="radio" placeholder="ShopAdmin" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="radio" placeholder="Customer" />
+          </div> --}}
+          <a href="auth/google"> <input type="button" value="Login with G" class="btn solid"
+              style="margin-bottom: 50px;" /></a>
+          <p class="social-text">Check out our social platforms</p>
+          <div class="social-media">
+            <a href="https://www.facebook.com/othman.elhammali.3" target="_blank" class="social-icon">
+              <i class="fab fa-facebook-f" style="font-size:x-large;"></i>
+            </a>
+            <a href="https://twitter.com/Othmanovic1" target="_blank" class="social-icon">
+              <i class="fab fa-twitter" style="font-size:x-large;"></i>
+            </a>
+            {{!-- <a href="auth/google" class="social-icon">
+              <i class="fab fa-google"></i>
+            </a> --}}
+            <a href="https://www.instagram.com/othmanovic_96/" target="_blank" class="social-icon">
+              <i class="fab fa-instagram" style="font-size:x-large;"></i>
+            </a>
+          </div>
+        </form>
+        <form action="#" class="sign-up-form">
+          <h2 class="title">About us</h2>
+
+          <div style="text-align: justify;">
+            UTM Online Printing System (UTM-OPS) ia a web application system that provides the students with variety of shops with their rates and queue length in order to compare and choose among the printing shops in UTM. 
+          </div>
+          {{!-- <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" />
+          </div> --}}
+          <a href="/about" target="_blank"><input type="button" class="btn"
+              value="Read more" /></a>>
+          <p class="social-text">Checkout our social platforms</p>
+          <div class="social-media">
+            <a href="https://www.facebook.com/othman.elhammali.3" target="_blank" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/Othmanovic1" target="_blank" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>New here ?</h3>
+          <p>
+            UTM-OPS is a platform that allows students in the university of technology
+            Malaysia to print their documents online. Voilla!
+          </p>
+          <button class="btn transparent" id="sign-up-btn">
+            About us
+          </button>
+        </div>
+        <img src="img/log.svg" class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>One of us ?</h3>
+          <p>
+            UTM-OPS is a platform that allows students in the university of technology
+            Malaysia to print their documents online . Voilla!
+          </p>
+          <button class="btn transparent" id="sign-in-btn">
+            Sign in
+          </button>
+        </div>
+        <img src="img/register.svg" class="image" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <script >
+    const sign_up_btn = document.querySelector("#sign-up-btn");
+    const sign_in_btn = document.querySelector("#sign-in-btn");
+    const container = document.querySelector(".container");
+
+
+    sign_in_btn.addEventListener("click", () => {
+      container.classList.remove("sign-up-mode");
+    });
+
+    sign_up_btn.addEventListener("click", () => {
+      container.classList.add("sign-up-mode");
+    });
+  </script>
+</body>
+
+</html>

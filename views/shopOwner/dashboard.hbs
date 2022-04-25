@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Shop Admin Home</title>
+  <link href="/main.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,
+    700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</head>
+
+<body>
+
+  <div class="restaurant-choose__wrapper">
+
+
+    <div style="margin-top: 120px;" class="restaurant-choose">
+
+
+      <div style="background-image: url('/images/{{shop.shopImage}}');" class="restaurant-preview__background" id="restaurant-background">
+       
+        <div class="restaurant-preview__wrapper">
+          <div class="restaurant-preview">
+            <span class="restaurant-preview__title">{{shop.shopName}}</span>
+            <div class="restaurant-preview__footer">
+              <span class="restaurant-preview__price">{{shop.status}}</span>
+              {{!-- <span class="restaurant-preview__time">40-50 Min</span> --}}
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="restaurant-menu__nav">
+        <ul class="restaurant-menu">
+          <li class="restaurant-menu__card" id="acc" >Accepted Orders</li>
+          <li class="restaurant-menu__card" id="upc" >Upcoming Orders</li>
+        </ul>
+      </div>
+
+
+      <label style="margin-top: 50px;">
+        {{!-- <input type="text" class="search" placeholder="Search for a shop or service"> --}}
+      </label>
+      {{!-- <ul class="restaurant-choose__first"> --}}
+        <div class="container">
+
+          <div id="upcomingOrders" class="row">
+            {{#each upcomingOrders}}
+            <div class="col-sm-4">
+              <li style="list-style:none">
+                <div class=" card " style="margin-bottom: 20px;">
+                  <img src="/images/{{product.productImage}}" alt="{{product.productImage}}">
+                  <span class="card__name" style="margin-left: 15px;">{{product.productName}}</span>
+                  <span class="card__cuisines" style="margin-left: 15px;">{{numPages}} Pages</span>
+                  <span class="card__cuisines" style="margin-left: 15px;">Matric: {{matricNo}}</span>
+                  <span class="card__cuisines" style="margin-left: 15px;">Quantity: {{quantity}} copies</span>
+                  <span class="card__cuisines" style="margin-left: 15px;">Total price: {{totalPrice}} MYR</span>
+                  <div class="last-line">
+                    <span class="font-weight-bold" style="margin-left: 15px;"> {{status}}</span>
+                    <div style="float: right; margin-right: 15px; margin-bottom: 15px;">
+                      <a href="/acceptOrder/{{_id}}"><span> <button id="accept"
+                            class="authorization-options authorization-options--register">Accept</button></span></a>
+                      <a href="/rejectOrder/{{_id}}"><span><button id="reject"
+                            class="authorization-options">Reject</button></span></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+            </div>
+            {{else}}
+			<p>There are no upcoming orders, yet</p>
+            {{/each}}
+          </div>
+          {{!-- {{else}}
+        <p>You have no upcoming orders</p> --}}
+
+          <div id="acceptedOrders" hidden class="row">
+            {{#each acceptedOrders}}
+            <div class="col-sm-4">
+              <li style="list-style:none">
+                <div class=" card " style="margin-bottom: 20px;">
+                  <img src="/images/{{product.productImage}}" alt="{{product.productImage}}">
+                  <span class="card__name" style="margin-left: 15px;">{{product.productName}}</span>
+                  <span class="card__cuisines" style="margin-left: 15px;">{{numPages}} Pages</span>
+                  <span class="card__cuisines" style="margin-left: 15px;">MAtric: {{matricNo}} </span>
+                  <span class="card__cuisines" style="margin-left: 15px;">Quantity: {{quantity}} copies</span>
+                  <span class="card__cuisines" style="margin-left: 15px;">Total price: {{totalPrice}} MYR</span>
+                  <div class="last-line">
+                    <span class="font-weight-bold" style="margin-left: 15px;"> {{status}}</span>
+                    <div style="float: right; margin-right: 15px; margin-bottom: 15px;">
+                      <a href="/files/{{filename}}" download=""><span> <button id="accept"
+                            class="authorization-options authorization-options--register">Download</button></span></a>
+                      <a href="/completeOrder/{{_id}}"><span><button 
+                            class="authorization-options">Complete</button></span></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+            </div>
+            {{else}}
+			<p>You have not accepted any orders yet, yet</p>
+            {{/each}}
+          </div>
+          {{!-- {{else}}
+        <p>You have no accepted orders</p> --}}
+
+        </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+  {{!--
+  <script>
+    function togglePopup() {
+      document.getElementById("popup-1")
+        .classList.toggle("active");
+
+      var blur = document.getElementById('container');
+      blur.classList.toggle("active")
+    }
+
+    const realFileBtn = document.getElementById("real-file");
+    const customBtn = document.getElementById("custom-button");
+    const customTxt = document.getElementById("custom-text");
+
+    customBtn.addEventListener("click", function () {
+      realFileBtn.click();
+    });
+
+    realFileBtn.addEventListener("change", function () {
+      if (realFileBtn.value) {
+        customTxt.innerHTML = realFileBtn.value.match(
+          /[\/\\]([\w\d\s\.\-\(\)]+)$/
+        )[1];
+      } else {
+        customTxt.innerHTML = "No file chosen, yet.";
+      }
+    });
+
+  </script> --}}
+
+
+
+<script>
+
+ const accepted = document.getElementById("acc")
+ const upcoming = document.getElementById("upc")
+
+ accepted.addEventListener('click', ()=>{
+   const accRow = document.getElementById('acceptedOrders')
+   const upcRow = document.getElementById('upcomingOrders')
+   accRow.hidden = false
+   upcRow.hidden = true
+ })
+ 
+ upcoming.addEventListener('click', ()=>{
+   const accRow = document.getElementById('acceptedOrders')
+   const upcRow = document.getElementById('upcomingOrders')
+   accRow.hidden = true
+   upcRow.hidden = false
+ })
+
+
+    
+  </script>
+</body>
+
+</html>

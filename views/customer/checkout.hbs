@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Order Detalis</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://checkout.stripe.com/checkout.js" defer></script>
+    <link href="/main.css" rel="stylesheet">
+    <link href='https://www.soengsouy.com/favicon.ico' rel='icon' type='image/x-icon' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- library validate -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body onload="myFunction()">
+    <main>
+        <div class="container">
+            <div style="background-image: url('/images/{{product.productImage}}');" class="cover"></div>
+            <div class="content">
+                <!-- <div class="nav">
+                        
+                    </div> -->
+                <div class="content-body">
+
+                    <div class="black-label" style="margin-top:20px">
+                        <span class="title" style="font-size: 1.5rem; margin-top:50px"><b>Service:
+                                {{product.productName}} printing</b></span>
+
+                        <span style="position:fixed; right: 270px; "><a href="/customer/dashboard"><button
+                                    class="authorization-options "
+                                    style="font-weight:500px">Dashboard</button></a></span>
+
+                        <p class="title" style="font-size: large;"><b>Price: RM {{product.productPrice}} per
+                                page/item</b></p>
+                        
+                            <div class="details">
+                                <form action="">
+                                    <div id="purchaseForm">
+                                        <input type="hidden" name="productId" value="{{product._id}}">
+                                        <label for="npages"><i class="fa fa-book"></i> Number of Pages</label>
+                                        <input required type="number" id="numPages" name="numPages" placeholder="50">
+                                        {{!-- <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                        <input type="text" id="email" name="email" placeholder="soeng.souy@gmail.com"
+                                            required>
+                                        --}}
+                                        <label for="adr"><i class="fa fa-id-card"></i> Matric No</label>
+                                        <input required type="text" id="matricNo" name="matricNo" placeholder="A17CS4030">
+                                        <label for="adr"><i class="fa fa-copy"></i> Quantity</label>
+                                        <input required type="number" id="quantity" name="quantity" placeholder="2">
+                                        <!-- File upload -->
+                                        {{!-- <form action="/api/uploadFile" enctype="multipart/form-data" method="post">
+                                            --}}
+                                            <input required type="file" name="document"
+                                                accept="image/*, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                                id="real-file" hidden="hidden" onchange="return fileValidation()" />
+                                            <button type="button" id="custom-button">Choose a File</button>
+                                            <span id="custom-text">No file chosen, yet.</span>
+                                            {{!--
+                                        </form> --}}
+                                    </div>
+                                </form>
+                                <hr>
+                                <button id="submit" type="submit" onclick="validate('{{product.productPrice}}');"
+                                    class="submit-btn">Continue to Checkout</button>
+                            </div>
+                        
+
+                    </div>
+                </div>
+                <div id="card-element"></div>
+    </main>
+
+</body>
+<script>
+    let stripeHandler;
+    function myFunction() {
+
+
+
+        stripeHandler = StripeCheckout.configure({
+            key: 'pk_test_51Ir5xXApQJxpQC4tHL83VFwtXjdfbFtR97NsvvxglffFpr6Aphqd3slofMGlGwaMl3LzM123kQYQMro2MmlcO8Pw00qzDNfF8o',
+            locale: 'ms',
+            currency: 'myr',
+            token: function (token) {
+                console.log(token)
+                console.log(document.getElementsByName('productId').value)
+                const formData = new FormData();
+                formData.append("token", token.id)
+                formData.append("productId", document.getElementsByName('productId')[0].value)
+                formData.append("numPages", document.getElementsByName('numPages')[0].value)
+                formData.append("matricNo", document.getElementsByName('matricNo')[0].value)
+                formData.append("quantity", document.getElementsByName('quantity')[0].value)
+                formData.append("document", document.getElementsByName('document')[0].files[0])
+                fetch('/buy', {
+                    method: 'POST',
+                    body: formData,
+                }).then(function (res) {
+                    return res.json()
+                }).then(function (data) {
+                    alert("Payment is Successful ", data.status)
+                    window.location.pathname = `customer/paymentSuccess/${data.orderId}`
+                }).catch(function (error) {
+                    alert("Payment Failed ", error)
+                    console.error(error)
+                    window.location.pathname = 'customer/error'
+                })
+            }
+        });
+        console.log("done loading")
+
+
+    }
+
+    function validate(price){
+
+        const numPages = document.getElementById('numPages')
+        const matricNo = document.getElementById('matricNo')
+        const quantity = document.getElementById('quantity')
+        const file = document.getElementById('real-file')
+
+        if(numPages.value == null || numPages.value == ''){
+            alert("please fill up the Number of pages field")
+        }
+        else if(matricNo.value == null || matricNo.value == ''){
+            alert("please fill up the Matric field")
+        }
+        else if(matricNo.length < 8 || matricNo.length > 8){
+            alert("Matrich Number must be 8 charachters")
+        }
+       else if(quantity.value == null || quantity.value == ''){
+            alert("please fill up the quantity field")
+        }
+       else if(file.value == null || file.value == ''){
+            alert("please upload a file")
+        }
+
+        else{
+
+            
+        
+
+
+        let numPages = parseInt(document.getElementById("numPages").value) * parseInt(document.getElementById("quantity").value)
+
+        stripeHandler.open({
+            amount: numPages * parseFloat(price) * 100,
+        })
+
+      
+
+        }
+
+       
+
+    }
+
+        /*const numPages = document.getElementsByName('numPages')
+        const matricNo = document.getElementsByName('matricNo')
+        const quantity = document.getElementsByName('quantity')
+        const errorElement = document.getElementById('error')
+
+        form.addEventListener('submit', (e) => {
+            let messages = []
+            if (name.value === '' || name.value == null) {
+                messages.push('Number of pages is required')
+            }
+            if (matricNo.value === '' || matricNo.value == null) {
+                messages.push('Matrich Number is required')
+            }
+            if (quantity.value === '' || quantity.value == null) {
+                messages.push('Quantity of this order is required')
+            }
+
+            if (matricNo.value.length <= 8) {
+                messages.push('Matric Number must be longer than 8 characters')
+            }
+
+            if (messages.length > 0) {
+                e.preventDefault()
+                errorElement.innerText = messages.join(', ')
+            }
+        
+
+        });*/
+
+
+
+
+
+</script>
+<script src="/fileUpload.js"></script>
+
+</html>
